@@ -1,3 +1,5 @@
+![Codex Provider Switcher cover](docs/assets/codex-provider-switcher-cover.png)
+
 # Codex Provider Switcher / Codex 连接切换器
 
 Codex Provider Switcher is a Windows desktop app for one-click switching between official ChatGPT account mode and third-party OpenAI-compatible gateways.

@@ -1,0 +1,13 @@
+# Local installer output and secrets
+backups/
+*.log
+*.tmp
+auth*.json
+
+# Windows noise
+Thumbs.db
+Desktop.ini
+
+# Editor noise
+.vscode/
+.idea/

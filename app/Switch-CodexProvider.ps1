@@ -203,6 +203,34 @@ function Read-CurrentProvider {
   return "$provider; $model"
 }
 
+function Write-CodexLoginStatus {
+  if (-not (Get-Command codex -ErrorAction SilentlyContinue)) {
+    Write-Host 'codex command not found'
+    return
+  }
+
+  $previousErrorActionPreference = $ErrorActionPreference
+  $ErrorActionPreference = 'Continue'
+  try {
+    $output = & codex login status 2>&1
+    $exitCode = $LASTEXITCODE
+  } finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+  }
+
+  foreach ($line in $output) {
+    if ($line -is [System.Management.Automation.ErrorRecord]) {
+      Write-Host $line.ToString()
+    } else {
+      Write-Host $line
+    }
+  }
+
+  if ($exitCode -ne 0 -and -not $output) {
+    Write-Host "codex login status exited with code $exitCode"
+  }
+}
+
 if ($Provider -eq 'ccswitch') {
   $Provider = 'thirdparty'
   $ProviderId = 'freemodel'
@@ -221,7 +249,7 @@ if ($Provider -eq 'status') {
     }
   }
   Write-Host (Get-Text 'CodexLoginStatus')
-  codex login status
+  Write-CodexLoginStatus
   exit 0
 }
 

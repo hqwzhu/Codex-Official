@@ -65,7 +65,12 @@ Requirements / 前置要求：
 - Codex CLI installed and available as `codex`.
 - For official mode, Codex should be logged in with `Sign in with ChatGPT`.
 
-Run:
+Normal users can install by double-clicking either file in the project folder:
+
+- `一键安装.cmd`
+- `Install.cmd`
+
+If Windows blocks double-click scripts, open PowerShell in the project folder and run:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\installer\install.ps1
@@ -113,6 +118,8 @@ Built-in templates prefill common public parameters, but the final model name sh
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\installer\uninstall.ps1
 ```
+
+Normal users can also uninstall by double-clicking `一键卸载.cmd` or `Uninstall.cmd`.
 
 Uninstalling removes the app files and shortcuts only. It does not delete your Codex config, environment variables, or login credentials.
 

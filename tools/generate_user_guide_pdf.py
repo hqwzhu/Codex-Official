@@ -221,7 +221,8 @@ def build():
 
     add_section(story, "3. 安装")
     story.append(bullets(["Windows 10 或 Windows 11。", "已安装 Codex CLI，并且 codex 命令可用。", "官方模式需要 Codex 已通过 Sign in with ChatGPT 登录。"], STYLES["Body"]))
-    story.append(p("在项目目录运行：", STYLES["Body"]))
+    story.append(p("普通用户先打开根目录的 使用前必看.pdf，然后双击 一键安装.cmd 或 Install.cmd。", STYLES["Body"]))
+    story.append(p("如果 Windows 阻止双击脚本，再在项目目录运行：", STYLES["Body"]))
     story.append(p("powershell -NoProfile -ExecutionPolicy Bypass -File .\\installer\\install.ps1", STYLES["Code"]))
     story.append(
         bullets(
@@ -295,7 +296,8 @@ def build():
 
     story.append(PageBreak())
     add_section(story, "8. 卸载")
-    story.append(p("在项目目录运行：", STYLES["Body"]))
+    story.append(p("普通用户可以双击 一键卸载.cmd 或 Uninstall.cmd。", STYLES["Body"]))
+    story.append(p("如果 Windows 阻止双击脚本，再在项目目录运行：", STYLES["Body"]))
     story.append(p("powershell -NoProfile -ExecutionPolicy Bypass -File .\\installer\\uninstall.ps1", STYLES["Code"]))
     story.append(p("卸载只删除应用文件和快捷方式，不会删除：", STYLES["Body"]))
     story.append(

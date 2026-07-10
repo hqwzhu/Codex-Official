@@ -21,6 +21,7 @@ It gives you one app window with four buttons:
 - `使用 CCswitch`：切换到第三方 CCswitch/Freemodel 通道。
 - `连接状态`：查看当前连接状态。
 - `重新登录 ChatGPT`：退出 API Key 登录并重新选择 ChatGPT 账号登录。
+- 界面内置“使用说明”，直接显示推荐操作步骤。
 
 ## Pain Point / 痛点
 
@@ -105,6 +106,8 @@ Open `Codex Provider Switcher`.
 - Click `重新登录 ChatGPT` / `Re-login ChatGPT` if Codex still shows API-key login and you want to restore ChatGPT account login.
 
 打开 `Codex Provider Switcher` 后，根据需要点击对应按钮。切换完成后，重启已经打开的 Codex 窗口，让 Codex 重新读取配置。
+
+应用窗口中间的“使用说明”区域会显示推荐操作顺序：先查看连接状态，再按需要切换官方或 CCswitch，必要时重新登录 ChatGPT。
 
 ## More Docs / 更多说明
 

@@ -30,6 +30,7 @@ The app updates only the active Codex provider settings, creates backups before 
 - CCswitch mode uses `FREEMODEL_API_KEY`.
 - Official mode uses Codex's built-in `openai` provider and ChatGPT account login.
 - The GUI is bilingual. It opens in Chinese by default and can switch to English from the language selector.
+- The GUI includes an instructions panel with the recommended operation steps.
 
 No API key is stored in this repository.
 
@@ -81,6 +82,8 @@ Open `Codex Provider Switcher` from the Desktop or Start menu.
 - Click `重新登录 ChatGPT` / `Re-login ChatGPT` if Codex still shows an API-key login and you want to restore official ChatGPT account login.
 
 After switching, restart any already-open Codex window so it reloads `config.toml`.
+
+The instructions panel in the app shows the recommended flow: check connection status first, switch to the needed provider, re-login ChatGPT only when needed, then restart any open Codex window.
 
 ## Uninstall
 

@@ -36,6 +36,8 @@ $Text = @{
     OpeningLogin = 'Opening ChatGPT login helper window.'
     LanguageZh = 'Chinese'
     LanguageEn = 'English'
+    InstructionsTitle = 'Instructions'
+    InstructionsText = "1. Click Connection Status first to check the active provider, FREEMODEL_API_KEY, and ChatGPT login state.`r`n2. Click Use Official ChatGPT for official account quota, or Use CCswitch for the third-party gateway.`r`n3. If official mode still shows API-key login, click Re-login ChatGPT and choose Sign in with ChatGPT.`r`n4. Restart any already-open Codex window after switching."
   }
   'zh-CN' = @{
     AppTitle = ConvertFrom-Utf8Base64 'Q29kZXgg6L+e5o6l5YiH5o2i5Zmo'
@@ -57,6 +59,8 @@ $Text = @{
     OpeningLogin = ConvertFrom-Utf8Base64 '5q2j5Zyo5omT5byAIENoYXRHUFQg55m75b2V6L6F5Yqp56qX5Y+j44CC'
     LanguageZh = ConvertFrom-Utf8Base64 '5Lit5paH'
     LanguageEn = 'English'
+    InstructionsTitle = ConvertFrom-Utf8Base64 '5L2/55So6K+05piO'
+    InstructionsText = ConvertFrom-Utf8Base64 'MS4g5YWI54K54oCc6L+e5o6l54q25oCB4oCd77yM56Gu6K6k5b2T5YmNIHByb3ZpZGVy44CBRlJFRU1PREVMX0FQSV9LRVkg5ZKMIENoYXRHUFQg55m75b2V54q25oCB44CCCjIuIOmcgOimgeWumOaWuemineW6puaXtueCueKAnOS9v+eUqOWumOaWuSBDaGF0R1BU4oCd77yb6ZyA6KaB56ys5LiJ5pa5572R5YWz5pe254K54oCc5L2/55SoIENDc3dpdGNo4oCd44CCCjMuIOWmguaenOWumOaWueaooeW8j+S7jeaYvuekuiBBUEkgS2V5IOeZu+W9le+8jOeCueKAnOmHjeaWsOeZu+W9lSBDaGF0R1BU4oCd77yM5bm26YCJ5oupIFNpZ24gaW4gd2l0aCBDaGF0R1BU44CCCjQuIOWIh+aNouWujOaIkOWQju+8jOmHjeWQr+W3suaJk+W8gOeahCBDb2RleCDnqpflj6PjgII='
   }
 }
 
@@ -117,6 +121,8 @@ function Set-Language([string]$Language) {
   $loginButton.Text = Get-Text 'Login'
   $launchCheck.Text = Get-Text 'Launch'
   $logLabel.Text = Get-Text 'Log'
+  $instructionsGroup.Text = Get-Text 'InstructionsTitle'
+  $instructionsText.Text = Get-Text 'InstructionsText'
 }
 
 function Invoke-ProviderAction([string]$Provider) {
@@ -172,8 +178,8 @@ function Start-ChatGptLogin {
 
 $form = New-Object System.Windows.Forms.Form
 $form.StartPosition = 'CenterScreen'
-$form.Size = New-Object System.Drawing.Size(760, 540)
-$form.MinimumSize = New-Object System.Drawing.Size(700, 480)
+$form.Size = New-Object System.Drawing.Size(920, 700)
+$form.MinimumSize = New-Object System.Drawing.Size(840, 640)
 $form.BackColor = [System.Drawing.Color]::FromArgb(248, 250, 252)
 $form.Font = New-Font 9
 
@@ -194,15 +200,17 @@ $form.Controls.Add($subtitle)
 $languageLabel = New-Object System.Windows.Forms.Label
 $languageLabel.Font = New-Font 9
 $languageLabel.ForeColor = [System.Drawing.Color]::FromArgb(51, 65, 85)
-$languageLabel.AutoSize = $true
-$languageLabel.Location = New-Object System.Drawing.Point(560, 28)
+$languageLabel.AutoSize = $false
+$languageLabel.TextAlign = [System.Drawing.ContentAlignment]::MiddleRight
+$languageLabel.Location = New-Object System.Drawing.Point(620, 26)
+$languageLabel.Size = New-Object System.Drawing.Size(90, 24)
 $languageLabel.Anchor = 'Top,Right'
 $form.Controls.Add($languageLabel)
 
 $languageBox = New-Object System.Windows.Forms.ComboBox
 $languageBox.DropDownStyle = 'DropDownList'
-$languageBox.Location = New-Object System.Drawing.Point(610, 24)
-$languageBox.Size = New-Object System.Drawing.Size(112, 24)
+$languageBox.Location = New-Object System.Drawing.Point(720, 24)
+$languageBox.Size = New-Object System.Drawing.Size(150, 24)
 $languageBox.Anchor = 'Top,Right'
 [void]$languageBox.Items.Add($Text['zh-CN'].LanguageZh)
 [void]$languageBox.Items.Add($Text['en-US'].LanguageEn)
@@ -211,7 +219,7 @@ $form.Controls.Add($languageBox)
 
 $buttonPanel = New-Object System.Windows.Forms.TableLayoutPanel
 $buttonPanel.Location = New-Object System.Drawing.Point(24, 104)
-$buttonPanel.Size = New-Object System.Drawing.Size(700, 120)
+$buttonPanel.Size = New-Object System.Drawing.Size(846, 120)
 $buttonPanel.ColumnCount = 2
 $buttonPanel.RowCount = 2
 $buttonPanel.Anchor = 'Top,Left,Right'
@@ -250,11 +258,31 @@ $launchCheck.Location = New-Object System.Drawing.Point(30, 238)
 $launchCheck.ForeColor = [System.Drawing.Color]::FromArgb(51, 65, 85)
 $form.Controls.Add($launchCheck)
 
+$instructionsGroup = New-Object System.Windows.Forms.GroupBox
+$instructionsGroup.Location = New-Object System.Drawing.Point(24, 272)
+$instructionsGroup.Size = New-Object System.Drawing.Size(846, 120)
+$instructionsGroup.Anchor = 'Top,Left,Right'
+$instructionsGroup.Font = New-Font 10 ([System.Drawing.FontStyle]::Bold)
+$instructionsGroup.ForeColor = [System.Drawing.Color]::FromArgb(15, 23, 42)
+$form.Controls.Add($instructionsGroup)
+
+$instructionsText = New-Object System.Windows.Forms.TextBox
+$instructionsText.Multiline = $true
+$instructionsText.ReadOnly = $true
+$instructionsText.BorderStyle = 'None'
+$instructionsText.BackColor = [System.Drawing.Color]::FromArgb(248, 250, 252)
+$instructionsText.ForeColor = [System.Drawing.Color]::FromArgb(51, 65, 85)
+$instructionsText.Font = New-Font 9
+$instructionsText.Location = New-Object System.Drawing.Point(12, 24)
+$instructionsText.Size = New-Object System.Drawing.Size(820, 84)
+$instructionsText.Anchor = 'Top,Bottom,Left,Right'
+$instructionsGroup.Controls.Add($instructionsText)
+
 $logLabel = New-Object System.Windows.Forms.Label
 $logLabel.Font = New-Font 10 ([System.Drawing.FontStyle]::Bold)
 $logLabel.ForeColor = [System.Drawing.Color]::FromArgb(15, 23, 42)
 $logLabel.AutoSize = $true
-$logLabel.Location = New-Object System.Drawing.Point(26, 274)
+$logLabel.Location = New-Object System.Drawing.Point(26, 410)
 $form.Controls.Add($logLabel)
 
 $logBox = New-Object System.Windows.Forms.TextBox
@@ -265,8 +293,8 @@ $logBox.Font = New-Object System.Drawing.Font('Consolas', 9)
 $logBox.BackColor = [System.Drawing.Color]::FromArgb(15, 23, 42)
 $logBox.ForeColor = [System.Drawing.Color]::FromArgb(226, 232, 240)
 $logBox.BorderStyle = 'FixedSingle'
-$logBox.Location = New-Object System.Drawing.Point(24, 300)
-$logBox.Size = New-Object System.Drawing.Size(700, 180)
+$logBox.Location = New-Object System.Drawing.Point(24, 436)
+$logBox.Size = New-Object System.Drawing.Size(846, 200)
 $logBox.Anchor = 'Top,Bottom,Left,Right'
 $form.Controls.Add($logBox)
 

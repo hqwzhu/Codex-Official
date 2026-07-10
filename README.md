@@ -8,6 +8,7 @@ Codex Provider Switcher 是一个 Windows 本地小工具，用来一键切换 C
 
 It gives you one app window with four buttons:
 
+- Default Chinese UI with a `中文 / English` language switcher.
 - `Use Official ChatGPT`: switch Codex to the official `openai` provider and ChatGPT account login.
 - `Use CCswitch`: switch Codex to the third-party CCswitch/Freemodel provider.
 - `Connection Status`: check the active provider and login state.
@@ -15,10 +16,11 @@ It gives you one app window with four buttons:
 
 它把四个常用动作整合到一个应用窗口里：
 
-- `Use Official ChatGPT`：切换到官方 ChatGPT 账号通道。
-- `Use CCswitch`：切换到第三方 CCswitch/Freemodel 通道。
-- `Connection Status`：查看当前连接状态。
-- `Re-login ChatGPT`：退出 API Key 登录并重新选择 ChatGPT 账号登录。
+- 默认中文界面，并支持 `中文 / English` 一键切换。
+- `使用官方 ChatGPT`：切换到官方 ChatGPT 账号通道。
+- `使用 CCswitch`：切换到第三方 CCswitch/Freemodel 通道。
+- `连接状态`：查看当前连接状态。
+- `重新登录 ChatGPT`：退出 API Key 登录并重新选择 ChatGPT 账号登录。
 
 ## Pain Point / 痛点
 
@@ -97,10 +99,10 @@ The installer creates:
 
 Open `Codex Provider Switcher`.
 
-- Click `Use Official ChatGPT` to use official OpenAI / ChatGPT account mode.
-- Click `Use CCswitch` to use CCswitch/Freemodel mode.
-- Click `Connection Status` to inspect the current state.
-- Click `Re-login ChatGPT` if Codex still shows API-key login and you want to restore ChatGPT account login.
+- Click `使用官方 ChatGPT` / `Use Official ChatGPT` to use official OpenAI / ChatGPT account mode.
+- Click `使用 CCswitch` / `Use CCswitch` to use CCswitch/Freemodel mode.
+- Click `连接状态` / `Connection Status` to inspect the current state.
+- Click `重新登录 ChatGPT` / `Re-login ChatGPT` if Codex still shows API-key login and you want to restore ChatGPT account login.
 
 打开 `Codex Provider Switcher` 后，根据需要点击对应按钮。切换完成后，重启已经打开的 Codex 窗口，让 Codex 重新读取配置。
 

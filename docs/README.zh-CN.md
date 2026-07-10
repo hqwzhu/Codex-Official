@@ -34,6 +34,7 @@ Codex 可以通过不同方式连接模型：
 
 - CCswitch 模式读取 `FREEMODEL_API_KEY`。
 - 官方模式使用 Codex 内置 `openai` provider 和 ChatGPT 账号登录。
+- 界面支持中文和英文切换，默认打开为中文。
 
 本仓库不会保存你的 API Key、登录凭据或本机备份文件。
 
@@ -78,10 +79,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\installer\install.ps1
 
 从桌面或开始菜单打开 `Codex Provider Switcher`。
 
-- 点击 `Use Official ChatGPT`：切换到官方 OpenAI provider 和 ChatGPT 账号登录模式。
-- 点击 `Use CCswitch`：切换到第三方 CCswitch/Freemodel provider。
-- 点击 `Connection Status`：查看当前 provider、Key 是否存在、Codex 当前登录状态。
-- 点击 `Re-login ChatGPT`：当状态仍显示 API Key 登录时，用它重新选择 `Sign in with ChatGPT`。
+- 右上角语言选择器可在中文和 English 之间切换。
+- 点击 `使用官方 ChatGPT`：切换到官方 OpenAI provider 和 ChatGPT 账号登录模式。
+- 点击 `使用 CCswitch`：切换到第三方 CCswitch/Freemodel provider。
+- 点击 `连接状态`：查看当前 provider、Key 是否存在、Codex 当前登录状态。
+- 点击 `重新登录 ChatGPT`：当状态仍显示 API Key 登录时，用它重新选择 `Sign in with ChatGPT`。
 
 切换完成后，需要重启已经打开的 Codex 窗口，让 Codex 重新读取 `config.toml`。
 

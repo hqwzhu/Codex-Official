@@ -20,7 +20,17 @@ New-Item -ItemType Directory -Force -Path $installDir | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $installDir 'backups') | Out-Null
 
 Get-ChildItem -LiteralPath $sourceAppDir -File | ForEach-Object {
-  Copy-Item -LiteralPath $_.FullName -Destination (Join-Path $installDir $_.Name) -Force
+  $destination = Join-Path $installDir $_.Name
+  if ($_.Name -eq 'providers.json' -and (Test-Path -LiteralPath $destination)) {
+    return
+  }
+  Copy-Item -LiteralPath $_.FullName -Destination $destination -Force
+}
+
+$installedProvidersPath = Join-Path $installDir 'providers.json'
+$installedProvidersExamplePath = Join-Path $installDir 'providers.example.json'
+if (-not (Test-Path -LiteralPath $installedProvidersPath) -and (Test-Path -LiteralPath $installedProvidersExamplePath)) {
+  Copy-Item -LiteralPath $installedProvidersExamplePath -Destination $installedProvidersPath -Force
 }
 
 if (-not (Test-Path -LiteralPath $silentLauncher)) {

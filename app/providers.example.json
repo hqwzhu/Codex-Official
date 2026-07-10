@@ -1,0 +1,16 @@
+{
+  "providers": [
+    {
+      "id": "freemodel",
+      "displayName": "CCswitch / Freemodel",
+      "modelProvider": "freemodel",
+      "baseUrl": "https://vip-sg.freemodel.dev",
+      "envKey": "FREEMODEL_API_KEY",
+      "wireApi": "responses",
+      "model": "gpt-5.5",
+      "modelReasoningEffort": "xhigh",
+      "serviceTier": "fast",
+      "preferredAuthMethod": "apikey"
+    }
+  ]
+}

@@ -3,6 +3,7 @@ backups/
 *.log
 *.tmp
 auth*.json
+app/providers.json
 
 # Windows noise
 Thumbs.db

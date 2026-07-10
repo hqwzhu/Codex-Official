@@ -4,6 +4,12 @@ Codex Provider Switcher is a Windows desktop app for one-click switching between
 
 Codex Provider Switcher 是一个 Windows 桌面应用，用来一键切换 Codex 的官方 ChatGPT 账号连接和第三方 OpenAI-compatible 网关连接。
 
+## Creator / 创作者
+
+ENHE AI | Developed by Enhe Intelligent Technology Studio | Website: [https://www.enhe-tech.com.cn](https://www.enhe-tech.com.cn)
+
+恩禾 ENHE AI｜恩禾智能科技工作室研发｜官网：[https://www.enhe-tech.com.cn](https://www.enhe-tech.com.cn)
+
 ## What It Solves / 解决什么痛点
 
 Many normal AI users use both:

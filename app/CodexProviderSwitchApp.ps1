@@ -11,6 +11,7 @@ $loginScript = Join-Path $scriptDir 'Login-ChatGPT.cmd'
 $providersPath = Join-Path $scriptDir 'providers.json'
 $providersExamplePath = Join-Path $scriptDir 'providers.example.json'
 $powershellExe = Join-Path $env:WINDIR 'System32\WindowsPowerShell\v1.0\powershell.exe'
+$officialWebsiteUrl = 'https://www.enhe-tech.com.cn'
 $currentLanguage = 'zh-CN'
 $script:providerItems = @()
 
@@ -43,6 +44,7 @@ $Text = @{
     OpeningLogin = 'Opening ChatGPT login helper window.'
     LanguageZh = 'Chinese'
     LanguageEn = 'English'
+    CreatorInfo = 'ENHE AI | Developed by Enhe Intelligent Technology Studio | Website: '
     InstructionsTitle = 'Instructions'
     InstructionsText = "1. Click Connection Status first to confirm the current connection and login state.`r`n2. For official quota, click Use Official ChatGPT.`r`n3. For a third-party gateway, choose it from the list and click Use Selected Third-party.`r`n4. If your gateway is missing, click Add Third-party Connection, choose a template, enter the API key, and save.`r`n5. Restart any already-open Codex window after switching."
     ProvidersReloaded = 'Third-party connection list reloaded.'
@@ -91,6 +93,7 @@ $Text = @{
     OpeningLogin = ConvertFrom-Utf8Base64 '5q2j5Zyo5omT5byAIENoYXRHUFQg55m75b2V6L6F5Yqp56qX5Y+j44CC'
     LanguageZh = ConvertFrom-Utf8Base64 '5Lit5paH'
     LanguageEn = 'English'
+    CreatorInfo = ConvertFrom-Utf8Base64 '5oGp56a+IEVOSEUgQUnvvZzmgannpr7mmbrog73np5HmioDlt6XkvZzlrqTnoJTlj5HvvZzlrpjnvZHvvJo='
     InstructionsTitle = ConvertFrom-Utf8Base64 '5L2/55So6K+05piO'
     InstructionsText = ConvertFrom-Utf8Base64 'MS4g5YWI54K56L+e5o6l54q25oCB77yM56Gu6K6k5b2T5YmN6L+e5o6l5ZKM55m75b2V54q25oCB44CCDQoyLiDnlKjlrpjmlrnpop3luqbvvJrngrnkvb/nlKjlrpjmlrkgQ2hhdEdQVOOAgg0KMy4g55So56ys5LiJ5pa577ya5YWI5Zyo5LiL5ouJ5qGG6YCJ5oup77yM5YaN54K55L2/55So5omA6YCJ56ys5LiJ5pa544CCDQo0LiDmsqHmnInkvaDnmoTnrKzkuInmlrnvvJ/ngrnmt7vliqDnrKzkuInmlrnov57mjqXvvIzmjInmqKHmnb/loasgQVBJIEtleSDlkI7kv53lrZjjgIINCjUuIOWIh+aNouWQjumHjeWQr+W3suaJk+W8gOeahCBDb2RleCDnqpflj6PjgII='
     ProvidersReloaded = ConvertFrom-Utf8Base64 '56ys5LiJ5pa56L+e5o6l5YiX6KGo5bey5Yi35paw44CC'
@@ -489,6 +492,9 @@ function Set-Language([string]$Language) {
   $logLabel.Text = Get-Text 'Log'
   $instructionsGroup.Text = Get-Text 'InstructionsTitle'
   $instructionsText.Text = Get-Text 'InstructionsText'
+  $creatorLink.Text = (Get-Text 'CreatorInfo') + $officialWebsiteUrl
+  $creatorLink.Links.Clear()
+  [void]$creatorLink.Links.Add((Get-Text 'CreatorInfo').Length, $officialWebsiteUrl.Length, $officialWebsiteUrl)
 }
 
 function Invoke-ProviderAction([string]$Provider, [string]$ProviderId = '') {
@@ -739,9 +745,29 @@ $logBox.BackColor = [System.Drawing.Color]::FromArgb(15, 23, 42)
 $logBox.ForeColor = [System.Drawing.Color]::FromArgb(226, 232, 240)
 $logBox.BorderStyle = 'FixedSingle'
 $logBox.Location = New-Object System.Drawing.Point(24, 566)
-$logBox.Size = New-Object System.Drawing.Size(846, 184)
+$logBox.Size = New-Object System.Drawing.Size(846, 152)
 $logBox.Anchor = 'Top,Bottom,Left,Right'
 $form.Controls.Add($logBox)
+
+$creatorLink = New-Object System.Windows.Forms.LinkLabel
+$creatorLink.Font = New-Font 9
+$creatorLink.ForeColor = [System.Drawing.Color]::FromArgb(71, 85, 105)
+$creatorLink.LinkColor = [System.Drawing.Color]::FromArgb(37, 99, 235)
+$creatorLink.ActiveLinkColor = [System.Drawing.Color]::FromArgb(29, 78, 216)
+$creatorLink.VisitedLinkColor = [System.Drawing.Color]::FromArgb(37, 99, 235)
+$creatorLink.LinkBehavior = [System.Windows.Forms.LinkBehavior]::HoverUnderline
+$creatorLink.AutoSize = $false
+$creatorLink.Location = New-Object System.Drawing.Point(24, 728)
+$creatorLink.Size = New-Object System.Drawing.Size(846, 24)
+$creatorLink.Anchor = 'Bottom,Left,Right'
+$creatorLink.Add_LinkClicked({
+  try {
+    Start-Process -FilePath $officialWebsiteUrl
+  } catch {
+    Add-Log $_.Exception.Message
+  }
+})
+$form.Controls.Add($creatorLink)
 
 $officialButton.Add_Click({ Invoke-ProviderAction 'official' })
 $statusButton.Add_Click({ Invoke-ProviderAction 'status' })

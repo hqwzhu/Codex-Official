@@ -7,6 +7,10 @@ Codex Provider Switcher is a Windows desktop app that lets normal AI users switc
 
 The default third-party provider is `CCswitch / Freemodel`. The app can also add OpenRouter, SiliconFlow, private gateways, or other compatible services.
 
+## Creator
+
+ENHE AI | Developed by Enhe Intelligent Technology Studio | Website: [https://www.enhe-tech.com.cn](https://www.enhe-tech.com.cn)
+
 ## Simple Workflow
 
 1. Open the Desktop shortcut `Codex Provider Switcher`.

@@ -175,7 +175,7 @@ def build():
         topMargin=18 * mm,
         bottomMargin=18 * mm,
         title="Codex Provider Switcher 使用手册",
-        author="Codex Provider Switcher",
+        author="ENHE AI",
     )
 
     story = []
@@ -183,6 +183,12 @@ def build():
     story.append(
         p(
             "一键切换官方 ChatGPT 账号连接和第三方 OpenAI-compatible 网关。普通用户只需要看状态、选连接、点按钮。",
+            STYLES["Subtitle"],
+        )
+    )
+    story.append(
+        p(
+            '恩禾 ENHE AI｜恩禾智能科技工作室研发｜官网：<a href="https://www.enhe-tech.com.cn">https://www.enhe-tech.com.cn</a>',
             STYLES["Subtitle"],
         )
     )

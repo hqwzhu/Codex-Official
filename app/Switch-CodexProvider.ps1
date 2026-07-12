@@ -19,6 +19,7 @@ $providersExamplePath = Join-Path $scriptDir 'providers.example.json'
 $codexHome = Join-Path $env:USERPROFILE '.codex'
 $configPath = Join-Path $codexHome 'config.toml'
 $backupDir = Join-Path $codexHome 'provider-switch\backups'
+$officialSettingsPath = Join-Path $codexHome 'provider-switch\official-settings.json'
 New-Item -ItemType Directory -Force -Path $backupDir | Out-Null
 
 function ConvertFrom-Utf8Base64([string]$Value) {
@@ -118,7 +119,7 @@ function New-StringList([string[]]$Lines) {
   foreach ($line in $Lines) {
     [void]$list.Add($line)
   }
-  return $list
+  return ,$list
 }
 
 function Set-TomlScalar([string[]]$Lines, [string]$Key, [string]$Value) {
@@ -183,6 +184,40 @@ function Set-TomlSectionScalar([string[]]$Lines, [string]$SectionName, [string]$
   $list = New-StringList $Lines
   $list.Insert($end, $replacement)
   return $list.ToArray()
+}
+
+function Get-TomlScalar([string[]]$Lines, [string]$Key, [string]$Default = '') {
+  $pattern = "^\s*$([regex]::Escape($Key))\s*=\s*`"(?<value>[^`"]*)`""
+
+  foreach ($line in $Lines) {
+    if ($line -match '^\s*\[.+\]\s*$') { break }
+    if ($line -match $pattern) { return $Matches['value'] }
+  }
+
+  return $Default
+}
+
+function Save-OfficialSettings([string[]]$Lines) {
+  if ((Get-TomlScalar $Lines 'model_provider') -ne 'openai') { return }
+
+  $settings = [ordered]@{
+    model = Get-TomlScalar $Lines 'model' 'gpt-5.5'
+    modelReasoningEffort = Get-TomlScalar $Lines 'model_reasoning_effort' 'medium'
+    serviceTier = Get-TomlScalar $Lines 'service_tier' 'fast'
+  }
+  $settings | ConvertTo-Json | Set-Content -LiteralPath $officialSettingsPath -Encoding UTF8
+}
+
+function Get-OfficialSettings {
+  if (Test-Path -LiteralPath $officialSettingsPath) {
+    return Get-Content -LiteralPath $officialSettingsPath -Raw -Encoding UTF8 | ConvertFrom-Json
+  }
+
+  return [pscustomobject]@{
+    model = 'gpt-5.5'
+    modelReasoningEffort = 'medium'
+    serviceTier = 'fast'
+  }
 }
 
 function Read-CurrentProvider {
@@ -262,6 +297,7 @@ $backupPath = Join-Path $backupDir "config.$timestamp.toml"
 Copy-Item -LiteralPath $configPath -Destination $backupPath -Force
 
 $lines = Get-Content -LiteralPath $configPath
+Save-OfficialSettings $lines
 
 if ($Provider -eq 'thirdparty') {
   $selected = Find-ThirdPartyProvider $ProviderId
@@ -274,7 +310,6 @@ if ($Provider -eq 'thirdparty') {
   $model = Get-JsonProperty $selected 'model' 'gpt-5.5'
   $reasoningEffort = Get-JsonProperty $selected 'modelReasoningEffort' 'xhigh'
   $serviceTier = Get-JsonProperty $selected 'serviceTier' 'fast'
-  $authMethod = Get-JsonProperty $selected 'preferredAuthMethod' 'apikey'
 
   if ([string]::IsNullOrWhiteSpace($modelProvider) -or [string]::IsNullOrWhiteSpace($baseUrl) -or [string]::IsNullOrWhiteSpace($envKey)) {
     throw (Format-Text 'ProviderNotFound' @($ProviderId))
@@ -287,7 +322,6 @@ if ($Provider -eq 'thirdparty') {
   $lines = Set-TomlScalar $lines 'model' $model
   $lines = Set-TomlScalar $lines 'model_reasoning_effort' $reasoningEffort
   $lines = Set-TomlScalar $lines 'service_tier' $serviceTier
-  $lines = Set-TomlScalar $lines 'preferred_auth_method' $authMethod
 
   $sectionName = "model_providers.$modelProvider"
   $lines = Set-TomlSectionScalar $lines $sectionName 'name' $displayName
@@ -298,11 +332,11 @@ if ($Provider -eq 'thirdparty') {
   $switchName = $displayName
   $envName = "$envKey ($displayName)"
 } else {
+  $officialSettings = Get-OfficialSettings
   $lines = Set-TomlScalar $lines 'model_provider' 'openai'
-  $lines = Set-TomlScalar $lines 'model' 'gpt-5.5'
-  $lines = Set-TomlScalar $lines 'model_reasoning_effort' 'medium'
-  $lines = Set-TomlScalar $lines 'service_tier' 'fast'
-  $lines = Set-TomlScalar $lines 'preferred_auth_method' 'chatgpt'
+  $lines = Set-TomlScalar $lines 'model' (Get-JsonProperty $officialSettings 'model' 'gpt-5.5')
+  $lines = Set-TomlScalar $lines 'model_reasoning_effort' (Get-JsonProperty $officialSettings 'modelReasoningEffort' 'medium')
+  $lines = Set-TomlScalar $lines 'service_tier' (Get-JsonProperty $officialSettings 'serviceTier' 'fast')
   $switchName = 'Official ChatGPT'
   $envName = 'ChatGPT account login'
 }

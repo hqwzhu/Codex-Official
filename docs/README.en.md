@@ -5,7 +5,7 @@ Codex Provider Switcher is a Windows desktop app that lets normal AI users switc
 - Official ChatGPT account mode.
 - Third-party OpenAI-compatible gateway mode.
 
-The default third-party provider is `CCswitch / Freemodel`. The app can also add OpenRouter, SiliconFlow, private gateways, or other compatible services.
+The default third-party provider is `CCswitch / Freemodel`. The app can also add OpenRouter, private gateways, or other services that support the Responses API.
 
 ## Creator
 
@@ -18,7 +18,7 @@ ENHE AI | Developed by Enhe Intelligent Technology Studio | Website: [https://ww
 3. To use official quota, click `Use Official ChatGPT`.
 4. To use a third-party gateway, choose it from `Third-party connection`, then click `Use Selected Third-party`.
 5. If your gateway is missing, click `Add Third-party Connection`, choose a template, enter the API key and model name, then save.
-6. Restart any already-open Codex window after switching.
+6. Existing tasks keep their original provider. Fully exit Codex, reopen it, and create a new task.
 
 Normal users do not need to edit `providers.json`. `Advanced Config` is for users who want to edit JSON manually.
 
@@ -67,7 +67,7 @@ Recommended path:
 
 1. Open the app.
 2. Click `Add Third-party Connection`.
-3. Choose `CCswitch / Freemodel`, `OpenRouter`, `SiliconFlow`, or `Custom`.
+3. Choose `CCswitch / Freemodel`, `OpenRouter`, or `Custom`.
 4. Enter the API key. The key is saved only to the current Windows user's environment variables, not to GitHub.
 5. Confirm `API URL`, `Environment variable`, `Model`, and `API type`.
 6. Click `Save`.
@@ -78,7 +78,7 @@ Common fields:
 - `API URL`: API endpoint from the gateway.
 - `Environment variable`: variable name that stores the API key, such as `OPENROUTER_API_KEY`.
 - `Model`: model name required by the gateway.
-- `API type`: usually `responses` or `chat`; follow the gateway documentation.
+- `API type`: current Codex custom providers require `responses`.
 
 Built-in templates prefill common public parameters, but the final model name should still match the model available in your own gateway account.
 

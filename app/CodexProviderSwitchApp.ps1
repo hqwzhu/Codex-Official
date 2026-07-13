@@ -32,7 +32,7 @@ $Text = @{
     AddProvider = 'Add Third-party Connection'
     EditProviders = 'Advanced Config'
     ReloadProviders = 'Reload List'
-    Launch = 'Launch Codex after switching'
+    Launch = 'Open Codex after switching (fully exit Codex first)'
     Log = 'Log'
     Started = 'Application started.'
     Running = 'Running provider action: {0}'
@@ -46,7 +46,7 @@ $Text = @{
     LanguageEn = 'English'
     CreatorInfo = 'ENHE AI | Developed by Enhe Intelligent Technology Studio | Website: '
     InstructionsTitle = 'Instructions'
-    InstructionsText = "1. Click Connection Status first to confirm the current connection and login state.`r`n2. For official quota, click Use Official ChatGPT.`r`n3. For a third-party gateway, choose it from the list and click Use Selected Third-party.`r`n4. If your gateway is missing, click Add Third-party Connection, choose a template, enter the API key, and save.`r`n5. Restart any already-open Codex window after switching."
+    InstructionsText = "1. Click Connection Status to confirm the provider that new tasks will use.`r`n2. For official quota, click Use Official ChatGPT.`r`n3. For a third-party gateway, choose it and click Use Selected Third-party.`r`n4. If the gateway is missing, add it with its API key and model.`r`n5. Existing tasks do not hot-switch. Fully exit Codex, reopen it, and create a new task."
     ProvidersReloaded = 'Third-party connection list reloaded.'
     OpeningProviderConfig = 'Opening third-party provider config.'
     ProviderConfigTitle = 'Third-party provider config'
@@ -66,7 +66,7 @@ $Text = @{
     ProviderAdded = 'Added third-party connection: {0}. If you entered an API key, it was saved to your Windows user environment variables.'
     ProviderExists = 'Connection already exists: {0}. If you entered an API key, the environment variable was updated.'
     RequiredFields = 'Fill in display name, API URL, environment variable, and model.'
-    AddProviderHelp = 'Most users only need to choose a template and enter the API key. Advanced users can adjust the model and API type.'
+    AddProviderHelp = 'Choose a connection template, enter the API key, and confirm the model. Codex custom providers currently require the Responses API.'
     CustomPreset = 'Custom'
   }
   'zh-CN' = @{
@@ -81,7 +81,7 @@ $Text = @{
     AddProvider = ConvertFrom-Utf8Base64 '5re75Yqg56ys5LiJ5pa56L+e5o6l'
     EditProviders = ConvertFrom-Utf8Base64 '6auY57qn57yW6L6R6YWN572u'
     ReloadProviders = ConvertFrom-Utf8Base64 '5Yi35paw5YiX6KGo'
-    Launch = ConvertFrom-Utf8Base64 '5YiH5o2i5ZCO5ZCv5YqoIENvZGV4'
+    Launch = ConvertFrom-Utf8Base64 '5YiH5o2i5ZCO5omT5byAIENvZGV477yI6K+35YWI5a6M5YWo6YCA5Ye6IENvZGV477yJ'
     Log = ConvertFrom-Utf8Base64 '5pel5b+X'
     Started = ConvertFrom-Utf8Base64 '5bqU55So5bey5ZCv5Yqo44CC'
     Running = ConvertFrom-Utf8Base64 '5q2j5Zyo5omn6KGM5pON5L2c77yaezB9'
@@ -95,7 +95,7 @@ $Text = @{
     LanguageEn = 'English'
     CreatorInfo = ConvertFrom-Utf8Base64 '5oGp56a+IEVOSEUgQUnvvZzmgannpr7mmbrog73np5HmioDlt6XkvZzlrqTnoJTlj5HvvZzlrpjnvZHvvJo='
     InstructionsTitle = ConvertFrom-Utf8Base64 '5L2/55So6K+05piO'
-    InstructionsText = ConvertFrom-Utf8Base64 'MS4g5YWI54K56L+e5o6l54q25oCB77yM56Gu6K6k5b2T5YmN6L+e5o6l5ZKM55m75b2V54q25oCB44CCDQoyLiDnlKjlrpjmlrnpop3luqbvvJrngrnkvb/nlKjlrpjmlrkgQ2hhdEdQVOOAgg0KMy4g55So56ys5LiJ5pa577ya5YWI5Zyo5LiL5ouJ5qGG6YCJ5oup77yM5YaN54K55L2/55So5omA6YCJ56ys5LiJ5pa544CCDQo0LiDmsqHmnInkvaDnmoTnrKzkuInmlrnvvJ/ngrnmt7vliqDnrKzkuInmlrnov57mjqXvvIzmjInmqKHmnb/loasgQVBJIEtleSDlkI7kv53lrZjjgIINCjUuIOWIh+aNouWQjumHjeWQr+W3suaJk+W8gOeahCBDb2RleCDnqpflj6PjgII='
+    InstructionsText = ConvertFrom-Utf8Base64 'MS4g5YWI54K54oCc6L+e5o6l54q25oCB4oCd77yM56Gu6K6k5paw5Lu75Yqh5bCG5L2/55So55qE6L+e5o6l44CCCjIuIOS9v+eUqOWumOaWuemineW6puaXtu+8jOeCueKAnOS9v+eUqOWumOaWuSBDaGF0R1BU4oCd44CCCjMuIOS9v+eUqOesrOS4ieaWueaXtu+8jOmAieaLqei/nuaOpeW5tueCueKAnOS9v+eUqOaJgOmAieesrOS4ieaWueKAneOAggo0LiDmsqHmnInnm67moIfov57mjqXml7bvvIzngrnigJzmt7vliqDnrKzkuInmlrnov57mjqXigJ3vvIzloavlhpkgQVBJIEtleSDlkozmqKHlnovlkI7kv53lrZjjgIIKNS4g5bey5omT5byA55qE5Lu75Yqh5LiN5Lya54Ot5YiH5o2i44CC6K+35a6M5YWo6YCA5Ye6IENvZGV477yM6YeN5paw5omT5byA5bm25paw5bu65Lu75Yqh44CC'
     ProvidersReloaded = ConvertFrom-Utf8Base64 '56ys5LiJ5pa56L+e5o6l5YiX6KGo5bey5Yi35paw44CC'
     OpeningProviderConfig = ConvertFrom-Utf8Base64 '5q2j5Zyo5omT5byA56ys5LiJ5pa56L+e5o6l6YWN572u44CC'
     ProviderConfigTitle = ConvertFrom-Utf8Base64 '56ys5LiJ5pa56L+e5o6l6YWN572u'
@@ -115,7 +115,7 @@ $Text = @{
     ProviderAdded = ConvertFrom-Utf8Base64 '5bey5re75Yqg56ys5LiJ5pa56L+e5o6l77yaezB944CC5aaC5p6c5aGr5YaZ5LqGIEFQSSBLZXnvvIzkuZ/lt7Lkv53lrZjliLDlvZPliY0gV2luZG93cyDnlKjmiLfnjq/looPlj5jph4/jgII='
     ProviderExists = ConvertFrom-Utf8Base64 '6L+e5o6l5bey5a2Y5Zyo77yaezB944CC5aaC5p6c5aGr5YaZ5LqGIEFQSSBLZXnvvIzlt7Lmm7TmlrDnjq/looPlj5jph4/jgII='
     RequiredFields = ConvertFrom-Utf8Base64 '6K+35aGr5YaZ5pi+56S65ZCN56ew44CBQVBJIOWcsOWdgOOAgeeOr+Wig+WPmOmHj+WQjeWSjOaooeWei+WQjeensOOAgg=='
-    AddProviderHelp = ConvertFrom-Utf8Base64 '5pmu6YCa55So5oi35Y+q6ZyA6YCJ5oup5qih5p2/5bm25aGr5YWlIEFQSSBLZXnvvJvpq5jnuqfnlKjmiLflho3kv67mlLnmqKHlnovlkozmjqXlj6PnsbvlnovjgII='
+    AddProviderHelp = ConvertFrom-Utf8Base64 '6YCJ5oup6L+e5o6l5qih5p2/77yM5aGr5YaZIEFQSSBLZXnvvIzlubbnoa7orqTmqKHlnovlkI3np7DjgILlvZPliY0gQ29kZXgg6Ieq5a6a5LmJ6L+e5o6l5LuF5pSv5oyBIFJlc3BvbnNlcyBBUEnjgII='
     CustomPreset = ConvertFrom-Utf8Base64 '6Ieq5a6a5LmJ'
   }
 }
@@ -398,7 +398,6 @@ function Show-AddProviderDialog {
   $wireApiBox.Dock = 'Fill'
   $wireApiBox.Margin = New-Object System.Windows.Forms.Padding(0, 5, 0, 4)
   [void]$wireApiBox.Items.Add('responses')
-  [void]$wireApiBox.Items.Add('chat')
   $wireApiBox.SelectedIndex = 0
 
   $layout.Controls.Add((New-DialogLabel (Get-Text 'PresetLabel')), 0, 0)
@@ -418,8 +417,7 @@ function Show-AddProviderDialog {
 
   $presets = @(
     [pscustomobject]@{ label = 'CCswitch / Freemodel'; id = 'freemodel'; displayName = 'CCswitch / Freemodel'; baseUrl = 'https://vip-sg.freemodel.dev'; envKey = 'FREEMODEL_API_KEY'; model = 'gpt-5.5'; wireApi = 'responses'; reasoning = 'xhigh'; serviceTier = 'fast' },
-    [pscustomobject]@{ label = 'OpenRouter'; id = 'openrouter'; displayName = 'OpenRouter'; baseUrl = 'https://openrouter.ai/api/v1'; envKey = 'OPENROUTER_API_KEY'; model = '~openai/gpt-latest'; wireApi = 'chat'; reasoning = 'high'; serviceTier = 'auto' },
-    [pscustomobject]@{ label = 'SiliconFlow / ' + (ConvertFrom-Utf8Base64 '56Gu5Z+65rWB5Yqo'); id = 'siliconflow'; displayName = 'SiliconFlow'; baseUrl = 'https://api.siliconflow.cn/v1'; envKey = 'SILICONFLOW_API_KEY'; model = 'Pro/zai-org/GLM-4.7'; wireApi = 'chat'; reasoning = 'medium'; serviceTier = 'auto' },
+    [pscustomobject]@{ label = 'OpenRouter'; id = 'openrouter'; displayName = 'OpenRouter'; baseUrl = 'https://openrouter.ai/api/v1'; envKey = 'OPENROUTER_API_KEY'; model = '~openai/gpt-latest'; wireApi = 'responses'; reasoning = 'high'; serviceTier = 'auto' },
     [pscustomobject]@{ label = Get-Text 'CustomPreset'; id = 'custom'; displayName = ''; baseUrl = ''; envKey = ''; model = ''; wireApi = 'responses'; reasoning = 'medium'; serviceTier = 'auto' }
   )
 

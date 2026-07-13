@@ -202,7 +202,7 @@ def build():
         bullets(
             [
                 "官方 ChatGPT 账号连接：使用 ChatGPT 账号里的 Codex 额度。",
-                "第三方连接：使用 CCswitch/Freemodel、OpenRouter、SiliconFlow/硅基流动、私有网关等兼容服务。",
+                "第三方连接：使用 CCswitch/Freemodel、OpenRouter 或支持 Responses API 的私有网关。",
                 "每次切换前都会自动备份配置，方便出错时恢复。",
             ],
             STYLES["Body"],
@@ -219,7 +219,7 @@ def build():
                 "要使用官方账号额度，点击 使用官方 ChatGPT。",
                 "要使用第三方连接，在 第三方连接 下拉框里选择连接，再点击 使用所选第三方。",
                 "列表里没有你的第三方时，点击 添加第三方连接，选择模板，填入 API Key 和模型名。",
-                "切换完成后，重启已经打开的 Codex 窗口。",
+                "已打开的任务会继续使用原连接。请完全退出 Codex，重新打开并新建任务。",
             ],
             STYLES["Body"],
         )
@@ -262,7 +262,7 @@ def build():
         steps(
             [
                 "点击 添加第三方连接。",
-                "在 连接模板 中选择 CCswitch / Freemodel、OpenRouter、SiliconFlow / 硅基流动 或 自定义。",
+                "在 连接模板 中选择 CCswitch / Freemodel、OpenRouter 或 自定义。",
                 "填入 API Key。Key 只保存到当前 Windows 用户环境变量，不会写进项目文件。",
                 "确认 API 地址、环境变量名、模型名称、接口类型。",
                 "点击 保存。",
@@ -282,14 +282,14 @@ def build():
         [p("API 地址", STYLES["Small"]), p("第三方网关给你的接口地址。", STYLES["Small"])],
         [p("环境变量名", STYLES["Small"]), p("保存 API Key 的变量名，例如 OPENROUTER_API_KEY。", STYLES["Small"])],
         [p("模型名称", STYLES["Small"]), p("第三方网关要求的模型名。", STYLES["Small"])],
-        [p("接口类型", STYLES["Small"]), p("通常是 responses 或 chat，以第三方网关说明为准。", STYLES["Small"])],
+        [p("接口类型", STYLES["Small"]), p("当前 Codex 自定义连接仅支持 responses。", STYLES["Small"])],
     ]
     story.append(make_table(rows, [48 * mm, 124 * mm]))
 
     add_section(
         story,
         "6. 官方 ChatGPT 模式",
-        "点击 使用官方 ChatGPT 后，工具会把 Codex 切换回官方 openai provider 和 ChatGPT 账号登录模式。如果状态仍显示 API Key 登录，点击 重新登录 ChatGPT，然后选择 Sign in with ChatGPT。",
+        "点击 使用官方 ChatGPT 后，工具会恢复上次使用的官方模型设置，并切换回 openai provider 和 ChatGPT 账号登录模式。如果状态仍显示 API Key 登录，点击 重新登录 ChatGPT，然后选择 Sign in with ChatGPT。",
     )
 
     add_section(
@@ -321,9 +321,9 @@ def build():
     add_section(story, "9. 常见问题")
     faq_rows = [
         [p("问题", STYLES["Small"]), p("处理方法", STYLES["Small"])],
-        [p("切换后为什么还没生效", STYLES["Small"]), p("关闭并重新打开已经运行的 Codex 窗口。", STYLES["Small"])],
+        [p("切换后为什么还没生效", STYLES["Small"]), p("旧任务不会热切换。请完全退出 Codex，重新打开并新建任务。", STYLES["Small"])],
         [p("API Key 要不要写进 providers.json", STYLES["Small"]), p("不要。providers.json 只保存环境变量名。", STYLES["Small"])],
-        [p("第三方连接不工作", STYLES["Small"]), p("检查 API Key、模型名称、接口类型 responses/chat。", STYLES["Small"])],
+        [p("第三方连接不工作", STYLES["Small"]), p("检查 API Key、模型名称，并确认网关支持 Responses API。", STYLES["Small"])],
         [p("官方模式是否需要 OpenAI API Key", STYLES["Small"]), p("不需要。官方模式使用 Sign in with ChatGPT。", STYLES["Small"])],
     ]
     story.append(make_table(faq_rows, [56 * mm, 116 * mm]))

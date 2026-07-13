@@ -17,14 +17,14 @@ ENHE AI | Developed by Enhe Intelligent Technology Studio | Website: [https://ww
 Many normal AI users use both:
 
 - Official ChatGPT account quota.
-- Third-party gateways such as CCswitch/Freemodel, OpenRouter, SiliconFlow, or a private gateway.
+- Responses-compatible third-party gateways such as CCswitch/Freemodel, OpenRouter, or a private gateway.
 
 Without this app, switching means editing `config.toml`, setting environment variables, and checking login state. That is easy to get wrong.
 
 很多普通 AI 用户会同时使用：
 
 - 官方 ChatGPT 账号额度。
-- CCswitch/Freemodel、OpenRouter、硅基流动或私有网关等第三方连接。
+- CCswitch/Freemodel、OpenRouter 或支持 Responses API 的私有网关等第三方连接。
 
 如果手动切换，就要改 `config.toml`、配置环境变量、检查登录状态，很容易切错或混用凭据。
 
@@ -36,7 +36,7 @@ Open `Codex Provider Switcher` and follow the buttons:
 2. `Use Official ChatGPT` / `使用官方 ChatGPT`: switch to official account quota.
 3. `Third-party connection` / `第三方连接`: choose a gateway, then click `Use Selected Third-party` / `使用所选第三方`.
 4. `Add Third-party Connection` / `添加第三方连接`: choose a template, enter the API key, and save. The key is saved only to your local Windows user environment variable.
-5. Restart any already-open Codex window after switching.
+5. Existing tasks keep their original provider. Fully exit Codex, reopen it, and create a new task after switching.
 
 普通用户不需要手动编辑 JSON。只有高级用户才需要点击 `高级编辑配置`。
 
@@ -44,9 +44,10 @@ Open `Codex Provider Switcher` and follow the buttons:
 
 - Default Chinese UI, with `中文 / English` switching.
 - Official ChatGPT mode and third-party API-key mode stay separate.
-- Built-in templates for CCswitch/Freemodel, OpenRouter, SiliconFlow, and custom gateways.
+- Built-in templates for CCswitch/Freemodel, OpenRouter, and custom Responses-compatible gateways.
 - Optional API key input in the add-provider form. Keys are not stored in this repository.
 - Every switch creates a backup under `%USERPROFILE%\.codex\provider-switch\backups`.
+- Switching back to official ChatGPT restores the previous official model settings.
 - Built-in usage instructions in the app window.
 
 ## Download / 下载
@@ -99,7 +100,7 @@ Recommended simple path:
 
 1. Open the app.
 2. Click `添加第三方连接`.
-3. Choose a template, such as `OpenRouter` or `SiliconFlow`.
+3. Choose a template, such as `OpenRouter`, or choose `Custom` for another Responses-compatible gateway.
 4. Paste the API key.
 5. Confirm the model name.
 6. Click `保存`.
@@ -111,7 +112,7 @@ Recommended simple path:
 %USERPROFILE%\.codex\provider-switch\providers.json
 ```
 
-Third-party gateways must be compatible with the `wireApi` and model settings Codex uses. Some gateways need `responses`, others need `chat`.
+Current Codex custom providers require `wireApi` to be `responses`. Chat-Completions-only gateways are not compatible.
 
 Built-in templates prefill common public parameters, but the final model name should still match the model available in your own gateway account.
 

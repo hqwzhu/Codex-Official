@@ -28,30 +28,32 @@ function ConvertFrom-Utf8Base64([string]$Value) {
 
 $Text = @{
   'en-US' = @{
-    CurrentConfig = 'Current Codex config: {0}'
+    CurrentConfig = 'Codex config for new tasks: {0}'
     CodexLoginStatus = 'Codex login status:'
     Switched = 'Switched Codex provider to {0}.'
     Backup = 'Backup: {0}'
     ProviderAuth = 'Provider auth: {0}'
-    Restart = 'Restart any already-open Codex window so it reloads config.toml.'
+    Restart = 'Config saved. Existing Codex tasks keep their original provider. Fully exit Codex, reopen it, and create a new task to use this connection.'
     MissingConfig = 'Missing config file: {0}'
     EmptySecret = '{0} was empty; no changes made.'
     ProviderNotFound = 'Third-party provider not found: {0}'
     MissingProviderConfig = 'Missing third-party provider config file: {0}'
+    UnsupportedWireApi = 'Unsupported API type "{0}". Codex currently supports only "responses" for custom providers.'
     ThirdPartyEnv = 'Third-party key ({0}): {1}'
     ThirdPartyProviders = 'Third-party providers:'
   }
   'zh-CN' = @{
-    CurrentConfig = ConvertFrom-Utf8Base64 '5b2T5YmNIENvZGV4IOmFjee9ru+8mnswfQ=='
+    CurrentConfig = ConvertFrom-Utf8Base64 '5paw5Lu75Yqh5bCG5L2/55So55qEIENvZGV4IOmFjee9ru+8mnswfQ=='
     CodexLoginStatus = ConvertFrom-Utf8Base64 'Q29kZXgg55m75b2V54q25oCB77ya'
     Switched = ConvertFrom-Utf8Base64 '5bey5YiH5o2iIENvZGV4IOi/nuaOpeWIsCB7MH3jgII='
     Backup = ConvertFrom-Utf8Base64 '5aSH5Lu977yaezB9'
     ProviderAuth = ConvertFrom-Utf8Base64 '6K6k6K+B5pa55byP77yaezB9'
-    Restart = ConvertFrom-Utf8Base64 '6K+36YeN5ZCv5bey57uP5omT5byA55qEIENvZGV4IOeql+WPo++8jOiuqeWug+mHjeaWsOivu+WPliBjb25maWcudG9tbOOAgg=='
+    Restart = ConvertFrom-Utf8Base64 '6YWN572u5bey5L+d5a2Y44CC5b2T5YmN5bey5omT5byA55qEIENvZGV4IOS7u+WKoeS8mue7p+e7reS9v+eUqOWOn+i/nuaOpeOAguivt+WujOWFqOmAgOWHuiBDb2RleO+8jOmHjeaWsOaJk+W8gOW5tuaWsOW7uuS7u+WKoeWQjuWGjeS9v+eUqOatpOi/nuaOpeOAgg=='
     MissingConfig = ConvertFrom-Utf8Base64 '57y65bCR6YWN572u5paH5Lu277yaezB9'
     EmptySecret = ConvertFrom-Utf8Base64 'ezB9IOS4uuepuu+8jOacqui/m+ihjOS/ruaUueOAgg=='
     ProviderNotFound = ConvertFrom-Utf8Base64 '5om+5LiN5Yiw56ys5LiJ5pa56L+e5o6l77yaezB9'
     MissingProviderConfig = ConvertFrom-Utf8Base64 '57y65bCR56ys5LiJ5pa56L+e5o6l6YWN572u5paH5Lu277yaezB9'
+    UnsupportedWireApi = ConvertFrom-Utf8Base64 '5LiN5pSv5oyB5o6l5Y+j57G75Z6L4oCcezB94oCd44CC5b2T5YmNIENvZGV4IOiHquWumuS5iei/nuaOpeWPquaUr+aMgeKAnHJlc3BvbnNlc+KAneOAgg=='
     ThirdPartyEnv = ConvertFrom-Utf8Base64 '56ys5LiJ5pa5IEtleSAoezB9Ke+8mnsxfQ=='
     ThirdPartyProviders = ConvertFrom-Utf8Base64 '56ys5LiJ5pa56L+e5o6l77ya'
   }
@@ -313,6 +315,9 @@ if ($Provider -eq 'thirdparty') {
 
   if ([string]::IsNullOrWhiteSpace($modelProvider) -or [string]::IsNullOrWhiteSpace($baseUrl) -or [string]::IsNullOrWhiteSpace($envKey)) {
     throw (Format-Text 'ProviderNotFound' @($ProviderId))
+  }
+  if ($wireApi -ne 'responses') {
+    throw (Format-Text 'UnsupportedWireApi' @($wireApi))
   }
 
   $apiKey = Get-EffectiveEnvValue $envKey
